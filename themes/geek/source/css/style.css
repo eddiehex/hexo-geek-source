@@ -47,6 +47,15 @@ nav {
   color: var(--primary-color);
 }
 
+.logo a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.logo a:hover {
+  color: var(--text-color);
+}
+
 .nav-links {
   display: flex;
   list-style: none;
@@ -326,9 +335,19 @@ main {
   color: var(--primary-color);
   margin: 2rem 0 1rem;
 }
+
+.category-item a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.category-item a:hover {
+  color: var(--primary-color);
+}
 .post-date {
   color: var(--meta-color);
 }
+
 /* Footer */
 footer {
   background-color: var(--card-bg);
