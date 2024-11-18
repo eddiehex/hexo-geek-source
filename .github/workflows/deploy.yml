@@ -1,0 +1,37 @@
+name: Deploy Hexo Blog
+
+on:
+  push:
+    branches:
+      - main  # 监控 main 分支的变化
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate static files
+        run: |
+          npm install hexo-cli -g
+          hexo generate
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name 'eddiehex'
+          git config --global user.email 'kygoho@live.com'
+          cd public
+          git init
+          git add .
+          git commit -m "Deploy Hexo site"
+          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/eddiehex/eddiehex.github.io.git" master:main
