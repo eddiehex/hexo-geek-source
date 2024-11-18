@@ -1,0 +1,60 @@
+title: Shark Blog
+subtitle: A minimalist geek theme
+description: A clean and minimalist blog theme for geeks
+author: Eddie Ho
+
+# URL
+url: http://example.com
+root: /
+permalink: :year/:month/:day/:title/
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+auto_spacing: false
+titlecase: false
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Theme
+theme: geek
+
+# Search
+search:
+  path: search.json
+  field: post
+
+# code highlight
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'ghcolors'
+  line_number: true    # default false
+
+# deploy github
+deploy:
+  type: git
+  repo: https://github.com/eddiehex/eddiehex.github.io.git
+  branch: gh-pages
+
+  
+  
+highlight:
+  enable: false

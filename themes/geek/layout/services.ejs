@@ -1,0 +1,20 @@
+<div class="services-container">
+  <div class="services-header">
+    <h1 class="services-title"><%= page.title %></h1>
+    <div class="services-intro">
+      <%- page.content %>
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <% site.data.services.forEach(function(service){ %>
+      <a href="<%- service.url %>" class="service-card" target="_blank">
+        <div class="service-icon">
+          <i class="<%- service.icon %>"></i>
+        </div>
+        <h3 class="service-name"><%- service.name %></h3>
+        <p class="service-description"><%- service.description %></p>
+      </a>
+    <% }) %>
+  </div>
+</div>

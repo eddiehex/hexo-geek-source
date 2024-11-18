@@ -1,0 +1,33 @@
+
+<div class="category-container">
+  <h2 class="category-title">
+    <% if (is_category()) { %>
+      Category: <%= page.category %>
+    <% } else { %>
+      All Categories
+    <% } %>
+  </h2>
+
+  <div class="category-list">
+    <% site.categories.each(function(category){ %>
+      <div class="category-item">
+        <h2 class="category-name">
+          <a href="<%- url_for(category.path) %>">
+            <%= category.name %>
+            <span class="category-count">(<%= category.posts.length %>)</span>
+          </a>
+        </h2>
+        <% if (is_category() && category.name === page.category) { %>
+          <div class="category-posts">
+            <% category.posts.each(function(post){ %>
+              <article class="category-post">
+                <span class="post-date"><%= date(post.date, 'YYYY-MM-DD') %></span>
+                <a href="<%- url_for(post.path) %>" class="post-title"><%= post.title %></a>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+</div>

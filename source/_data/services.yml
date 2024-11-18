@@ -1,0 +1,14 @@
+- name: Temporary Image
+  description: My personal Image bed
+  icon: fas fa-upload
+  url: https://bed.423327.xyz/
+
+- name: Mobile Apps
+  description: Native and cross-platform mobile applications
+  icon: fas fa-mobile-alt
+  url: https://example.com/mobile-apps
+
+- name: Alist
+  description: My personal storage manager
+  icon: fas fa-cloud
+  url: https://alist.009100.xyz/

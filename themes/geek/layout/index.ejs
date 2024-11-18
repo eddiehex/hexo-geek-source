@@ -1,0 +1,41 @@
+<div class="posts-container">
+  <% page.posts.each(function(post){ %>
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date"><i class="fas fa-calendar"></i> <%= date(post.date, 'YYYY-MM-DD') %></span>
+        <% if(post.categories && post.categories.length){ %>
+          <span class="post-categories">
+            <i class="fas fa-folder"></i>
+            <%- list_categories(post.categories, { show_count: false, style: 'none', separator: ', ' }) %>
+          </span>
+        <% } %>
+      </div>
+      <h2 class="post-title">
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </h2>
+      <div class="post-content">
+        <% if(post.excerpt) { %>
+          <%- post.excerpt %>
+        <% } else { %>
+          <%- post.content %>
+        <% } %>
+      </div>
+      <div class="post-footer">
+        <a href="<%- url_for(post.path) %>" class="read-more">
+          <span>Read More</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+  <% }) %>
+  
+  <% if (page.total > 1){ %>
+    <nav class="pagination">
+      <%- paginator({
+        prev_text: '<i class="fas fa-chevron-left"></i>',
+        next_text: '<i class="fas fa-chevron-right"></i>',
+        escape: false
+      }) %>
+    </nav>
+  <% } %>
+</div>

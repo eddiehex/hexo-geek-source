@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Shark Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="https://od.009100.xyz/api/raw/?path=/picture/Icon/shark.png" type="image/x-icon">
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Shark Blog</div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search...">
+        <div id="search-results"></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/">Posts</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/archives">Archive</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-container">
+  <article class="page-content">
+    <h1 class="page-title">linux 知识</h1>
+    <div class="page-body">
+      <h2 id="查看服务器情况"><a href="#查看服务器情况" class="headerlink" title="查看服务器情况"></a>查看服务器情况</h2><pre class="line-numbers language-shell"><code class="language-shell">#查看硬盘使用情况
+df -h
+#查看内存使用情况
+free -h
+#查看块设备情况
+lsblk
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="服务器登陆"><a href="#服务器登陆" class="headerlink" title="服务器登陆"></a>服务器登陆</h2><pre class="line-numbers language-shell"><code class="language-shell">#ssh 用户名@ip地址 -p 端口号 -i 密钥地址
+ssh root@206.190.232.205 -p 26838 -i /Users/eddieho/hx_for_hob/ssa/bwg_jp
+# 使用管理员权限
+sudo -i
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h2><pre class="line-numbers language-shell"><code class="language-shell">yum -y install wget
+yum update -y && yum install curl -y
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="常用-vm-测试"><a href="#常用-vm-测试" class="headerlink" title="常用 vm 测试"></a>常用 vm 测试</h2><pre class="line-numbers language-shell"><code class="language-shell">wget -qO- bench.sh | bash
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="查看-ip"><a href="#查看-ip" class="headerlink" title="查看 ip"></a>查看 ip</h2><pre class="line-numbers language-shell"><code class="language-shell">#查看公网ip
+curl -s http://tnx.nl/ip
+#
+ifconfig -a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h2><pre class="line-numbers language-shell"><code class="language-shell"># 移动或者改名
+mv mynginx/ myblog/
+# 创建
+mkdir myblog
+# 删除
+rm myblog
+rm -rf blog
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="处理防火墙"><a href="#处理防火墙" class="headerlink" title="处理防火墙"></a>处理防火墙</h2><pre class="line-numbers language-shell"><code class="language-shell">#停止firewall
+systemctl stop firewalld.service
+#禁止firewall开机启动
+systemctl disable firewalld.service
+#关闭iptables
+service iptables stop
+#去掉iptables开机启动
+chkconfig iptables off
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><pre class="line-numbers language-shell"><code class="language-shell"># 直接用export命令
+export PATH=$PATH:/opt/au1200_rm/build_tools/bin
+# 修改profile文件
+vi /etc/profile
+export PATH="$PATH:/opt/au1200_rm/build_tools/bin"
+source /etc/profile
+# 修改.bashrc文件
+ vi /root/.bashrc
+export PATH="$PATH:/opt/au1200_rm/build_tools/bin"
+# 修改.bashrc
+vi ~/.bashrc
+alias v2ray=/usr/local/sbin/v2ray
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="日期-时间"><a href="#日期-时间" class="headerlink" title="日期&amp;&amp;时间"></a>日期&amp;&amp;时间</h2><pre class="line-numbers language-sh"><code class="language-sh"># 当前时间
+date
+- Tue 14 Nov 2023 04:13:21 PM UTC
+# 当前时区
+timedatectl
+- Local time: Tue 2023-11-14 16:14:00 UTC
+           Universal time: Tue 2023-11-14 16:14:00 UTC
+                 RTC time: Tue 2023-11-14 16:14:01
+                Time zone: Etc/UTC (UTC, +0000)
+- System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+# 修改时区为上海
+timedatectl set-timezone Asia/Shanghai
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+  </article>
+</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Shark Blog</p>
+  </footer>
+
+  <script src="/js/search.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
