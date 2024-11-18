@@ -34,4 +34,4 @@ jobs:
           git init
           git add .
           git commit -m "Deploy Hexo site"
-          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/eddiehex/eddiehex.github.io.git" master:main
+          git push --force "https://${{ secrets.MY_TOKEN }}@github.com/eddiehex/eddiehex.github.io.git" master:main
