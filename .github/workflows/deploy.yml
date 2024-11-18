@@ -24,6 +24,7 @@ jobs:
       - name: Generate static files
         run: |
           npm install hexo-cli -g
+          hexo clean
           hexo generate
 
       - name: Deploy to GitHub Pages
@@ -32,7 +33,6 @@ jobs:
           git config --global user.email 'kygoho@live.com'
           cd public
           git init
-          git checkout -b main
           git add .
           git commit -m "Deploy Hexo site"
           git push --force "https://${{ secrets.MY_TOKEN }}@github.com/eddiehex/eddiehex.github.io.git" main:main
