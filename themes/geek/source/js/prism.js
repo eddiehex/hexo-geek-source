@@ -1649,3 +1649,16 @@ Prism.languages.sql = {
     });
   }
 })();
+
+// 找到Prism.plugins.lineNumbers部分,确保它被启用
+Prism.plugins.lineNumbers = {
+  // ... 保持原有配置不变
+};
+
+// 在文档加载完成后自动添加行号
+document.addEventListener('DOMContentLoaded', function() {
+  // 为所有代码块添加行号
+  document.querySelectorAll('pre').forEach(function(pre) {
+    pre.classList.add('line-numbers');
+  });
+});
