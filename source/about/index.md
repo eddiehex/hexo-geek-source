@@ -3,6 +3,7 @@ title: About
 layout: page
 ---
 
-# About Me
+# Just For Life Records
 
-Welcome to my geek blog! This is where I share my thoughts about technology, programming, and other geeky stuff.
+Welcome to my blog! This is where I share my thoughts about technology, programming, and Life.
+
