@@ -3,12 +3,12 @@ title: ssh 密钥登陆服务器
 date: 2024-01-03
 categories: 
     - linux
-excerpt: "SSH login Set"
+excerpt: "This article explains how to use SSH keys to log in to a Linux server."
 ---
 
 ### 登陆服务器后
 
-```
+```shell
 [root@host ~]$ ssh-keygen  <== 建立密钥对
 Generating public/private rsa key pair.
 Enter file in which to save the key (/root/.ssh/id_rsa): <== 按 Enter
@@ -23,7 +23,7 @@ The key fingerprint is:
 
 ### 建立共钥
 
-```
+```shell
 [root@host ~]$ cd .ssh
 [root@host .ssh]$ cat id_rsa.pub >> authorized_keys
 -- 更改权限
@@ -33,17 +33,17 @@ The key fingerprint is:
 
 ### 关闭密码登陆权限
 
-```
+```shell
 vi /etc/ssh/sshd_config
 ```
 
-```
+```shell
 PasswordAuthentication no
 ```
 
 ### 下载私钥
 
-```
+```shell
 cat root/.ssh/id_rsa
 -- 直接复制，粘贴到文本编辑器中保存为无格式 shift + cmd +T
 -- 本地更改私钥权限
@@ -52,6 +52,6 @@ chmod 600 id_rsa
 
 ### 登陆服务器
 
-```
+```shell
 ssh root@ip -p aaa -i /Users/eddieho/documents/hk666
 ```
