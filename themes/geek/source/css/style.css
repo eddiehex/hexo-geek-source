@@ -425,3 +425,44 @@ footer p {
     font-size: 1.5rem;
   }
 }
+
+/* 在文件末尾添加以下样式 */
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: #000000;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 1;
+  transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+  background-color: var(--hover-color);
+}
+
+pre {
+  position: relative !important;
+  margin: 1em 0;
+}
+
+/* 为行内代码添加样式 */
+code {
+  background-color: #df7614;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* 确保代码块中的代码不受上面样式影响 */
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
