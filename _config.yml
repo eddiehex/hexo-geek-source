@@ -61,3 +61,8 @@ archive_generator:
 
 highlight:
   enable: false
+
+# 在适当的位置添加以下配置
+# 如果已有 scripts 配置，只需添加新的路径
+scripts:
+  - /js/copy-code.js
