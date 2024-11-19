@@ -35,6 +35,8 @@ jobs:
       - name: Deploy to GitHub Pages
         run: |
           cd public
+          git config --global user.name 'eddiehex'
+          git config --global user.email 'kygoho@live.com'
           git init
           git checkout -b main
           git add .
