@@ -43,10 +43,10 @@ search:
   field: post
 
 # code highlight
-prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'ghcolors'
-  line_number: true    # default false
+# prism_plugin:
+#   mode: 'preprocess'    # realtime/preprocess
+#   theme: 'ghcolors'
+#   line_number: true    # default false
 
 # deploy github
 deploy:
@@ -61,7 +61,8 @@ archive_generator:
 
 highlight:
   enable: false
-
+prismjs:
+  enable: true
 # 在适当的位置添加以下配置
 # 如果已有 scripts 配置，只需添加新的路径
 scripts:
