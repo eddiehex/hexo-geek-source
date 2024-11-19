@@ -3,12 +3,37 @@
   icon: fas fa-upload
   url: https://bed.423327.xyz/
 
-- name: Mobile Apps
-  description: Native and cross-platform mobile applications
-  icon: fas fa-mobile-alt
-  url: https://example.com/mobile-apps
+- name: Jupyter
+  description: Online Jupyter-notebook
+  icon: fas fa-book
+  url: https://hexo.kygoho.win/py
 
 - name: Alist
   description: My personal storage manager
   icon: fas fa-cloud
   url: https://alist.009100.xyz/
+
+- name: RSS
+  description: RSS online reader
+  icon: fas fa-rss
+  url: https://rss.009100.xyz
+
+- name: Monitor
+  description: Service Monitor Panel
+  icon: fas fa-desktop
+  url: https://cloud.kygoho.win/
+
+- name: Chat-GPT
+  description: AI Chat bot
+  icon: fas fa-robot
+  url: https://sgp-web.423327.xyz/
+
+- name: Video List
+  description: Video Exist Checking
+  icon: fas fa-video
+  url: https://one.wadaho.cf/
+
+- name: Image Hosting
+  description: Image Hosting Service
+  icon: fas fa-cloud-upload-alt
+  url: https://up.423327.xyz
