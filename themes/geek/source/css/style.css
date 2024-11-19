@@ -173,6 +173,15 @@ main {
   margin-bottom: 1rem;
 }
 
+.post-categories a {
+  color: var(--meta-color);
+  text-decoration: none;
+}
+
+.post-categories a:hover {
+  color: var(--text-color);
+}
+
 .post-footer {
   margin-top: 2rem;
 }

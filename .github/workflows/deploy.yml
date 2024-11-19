@@ -27,10 +27,13 @@ jobs:
           hexo clean
           hexo generate
 
+      - name: Checkout target repo
+        run: |
+          git clone --depth 1 --branch main https://${{ secrets.MY_TOKEN }}@github.com/eddiehex/eddiehex.github.io.git ../eddiehex.github.io
+          cp ../eddiehex.github.io/CNAME public/
+
       - name: Deploy to GitHub Pages
         run: |
-          git config --global user.name 'eddiehex'
-          git config --global user.email 'kygoho@live.com'
           cd public
           git init
           git checkout -b main
