@@ -54,7 +54,10 @@ deploy:
   repo: https://github.com/eddiehex/eddiehex.github.io.git
   branch: gh-pages
 
-  
-  
+archive_generator:
+  per_page: 0
+  yearly: true
+  monthly: true
+
 highlight:
   enable: false

@@ -357,6 +357,36 @@ main {
   color: var(--meta-color);
 }
 
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+
+.pagination .page-number,
+.pagination .extend {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.pagination .current {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+.pagination a:hover {
+  background-color: var(--hover-color);
+  color: var(--bg-color);
+}
+
 /* Footer */
 footer {
   background-color: var(--card-bg);
