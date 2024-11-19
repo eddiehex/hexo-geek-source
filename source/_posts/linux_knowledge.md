@@ -2,7 +2,7 @@
 title: linux 知识
 date: 2024-01-01
 categories: 
-  - linux
+  - Linux
 excerpt: "Unlock the power of Linux with this comprehensive guide. From checking server status and managing files to configuring environment variables and handling firewall settings, this post covers essential Linux commands and operations. Whether you're a beginner or an experienced user, these tips will help you navigate and optimize your Linux environment with ease."
 ---
 
