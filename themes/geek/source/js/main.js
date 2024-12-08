@@ -16,4 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active');
     }
   });
+
+  // Image modal functionality
+  const modal = document.createElement('div');
+  modal.className = 'image-modal';
+  const modalImg = document.createElement('img');
+  modalImg.className = 'modal-content';
+  modal.appendChild(modalImg);
+  document.body.appendChild(modal);
+
+  document.querySelectorAll('.page-content img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+    });
+  });
+
+  modal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 });
