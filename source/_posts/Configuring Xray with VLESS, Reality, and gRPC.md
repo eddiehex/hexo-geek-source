@@ -1,5 +1,5 @@
 ---
-title: Configuring Xray with VLESS, Reality, and gRPC
+title: Configuring Xray with VLESS, Reality and gRPC
 date: 2023-11-01
 categories: 
   - Linux

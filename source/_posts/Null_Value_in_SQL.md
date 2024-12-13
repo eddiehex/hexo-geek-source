@@ -1,5 +1,5 @@
 ---
-title: Null_Value_in_SQL
+title: Null Value in SQL
 date: 2024-12-13
 categories:
   - SQL
