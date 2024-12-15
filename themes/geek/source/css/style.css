@@ -14,7 +14,9 @@
 }
 
 body {
-  font-family: 'Courier New', monospace;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -171,6 +173,10 @@ main {
   color: var(--text-color);
   margin-bottom: 1.5rem;
   line-height: 1.8;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.2px;
 }
 
 .post-content p {
@@ -321,6 +327,7 @@ main {
   margin: 1.5em 0 1em;
   font-weight: bold;
   line-height: 1.4;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .page-body h1 {
@@ -383,7 +390,7 @@ main {
 }
 
 .page-body code {
-  font-family: 'Courier New', Consolas, monospace;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-size: 0.9em;
