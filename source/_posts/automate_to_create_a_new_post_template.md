@@ -4,7 +4,7 @@ date: 2024-12-13
 categories:
   - Shell
 tags: [Shell,markdown]
-toc: true
+toc: false
 excerpt: "Use Shell script to automately create a new post template containing the meta information."
 ---
 

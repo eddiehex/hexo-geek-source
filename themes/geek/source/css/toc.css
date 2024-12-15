@@ -134,3 +134,16 @@
     max-height: none;
   }
 } 
+
+.toc-link {
+    transition: all 0.2s ease;
+    display: block;
+    padding: 3px 0;
+    color: #666;
+}
+
+.toc-link.active {
+    color: #42b983;
+    font-weight: bold;
+    transform: translateX(5px);
+} 

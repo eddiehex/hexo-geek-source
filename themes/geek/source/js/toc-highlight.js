@@ -47,69 +47,59 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  function highlightToc() {
+  function findHeadlineId(headline) {
+    // 将标题文本转换为 id
+    return headline.trim()
+        // 先处理英文和数字
+        .toLowerCase()
+        // 处理各种标点符号和空格
+        .replace(/[\s\(\)（）\[\]【】\{\}""''：:,，.。！!？?]/g, '-')
+        // 移除非法字符（只保留英文、数字、中文、连字符）
+        .replace(/[^a-z0-9\u4e00-\u9fa5-]/g, '')
+        // 移除首尾的连字符
+        .replace(/^-+|-+$/g, '')
+        // 将多个连字符替换为单个连字符
+        .replace(/-+/g, '-');
+  }
+
+  function updateTocHighlight() {
+    const headlines = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    
     const scrollPosition = window.scrollY;
-    const navHeight = 80; // 与上面的 navHeight 保持一致
-
-    // 找到当前可见的章节
-    let currentSection = null;
-    let minDistance = Infinity;
-
-    sections.forEach(section => {
-      const sectionTop = section.element.getBoundingClientRect().top + window.pageYOffset;
-      const distance = Math.abs(sectionTop - scrollPosition - navHeight);
-      
-      if (distance < minDistance) {
-        minDistance = distance;
-        currentSection = section;
-      }
-    });
-
-    // 更新活动状态
-    tocLinks.forEach(link => link.classList.remove('active'));
-    if (currentSection && currentSection.link) {
-      currentSection.link.classList.add('active');
-      
-      // 确保当前活动项在视图中
-      const tocContainer = toc.parentElement;
-      const linkRect = currentSection.link.getBoundingClientRect();
-      const containerRect = tocContainer.getBoundingClientRect();
-      
-      if (linkRect.bottom > containerRect.bottom) {
-        tocContainer.scrollTop += linkRect.bottom - containerRect.bottom;
-      } else if (linkRect.top < containerRect.top) {
-        tocContainer.scrollTop -= containerRect.top - linkRect.top;
-      }
+    
+    let currentHeadline = null;
+    for (const headline of headlines) {
+        const headlineTop = headline.offsetTop - 100;
+        if (scrollPosition >= headlineTop) {
+            currentHeadline = headline;
+        } else {
+            break;
+        }
+    }
+    
+    if (currentHeadline) {
+        // 移除所有高亮
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 获取当前标题的ID
+        const headlineId = findHeadlineId(currentHeadline.textContent.trim());
+        
+        // 添加新的高亮
+        tocLinks.forEach(link => {
+            const href = decodeURIComponent(link.getAttribute('href').substring(1));
+            // 同时检查原始ID和生成的ID
+            if (href === headlineId || href === currentHeadline.id) {
+                link.classList.add('active');
+            }
+        });
     }
   }
 
-  // 使用 Intersection Observer 来优化滚动检测
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        highlightToc();
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '-80px 0px -20% 0px' // 调整观察区域
-  });
-
-  // 观察所有标题元素
-  headings.forEach(heading => observer.observe(heading));
-
-  // 仍然保留滚动事件作为备份
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        highlightToc();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // 初始化高亮
-  highlightToc();
+  // 添加滚动事件监听器
+  window.addEventListener('scroll', updateTocHighlight);
+  // 页面加载完成后初始化高亮
+  document.addEventListener('DOMContentLoaded', updateTocHighlight);
 }); 
