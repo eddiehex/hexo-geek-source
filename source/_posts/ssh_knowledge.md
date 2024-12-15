@@ -3,6 +3,7 @@ title: ssh 密钥登陆服务器
 date: 2024-01-03
 categories: 
     - Linux
+tags: [Linux, SSH]
 excerpt: "This article explains how to use SSH keys to log in to a Linux server."
 ---
 

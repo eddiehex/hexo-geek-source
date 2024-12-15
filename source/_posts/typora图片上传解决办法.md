@@ -4,7 +4,7 @@ date: 2024-12-08
 categories: 
   - Shell
   - Typora
-tags: [Shell,API]
+tags: [Shell, API]
 toc: true
 excerpt: "利用自建图床，解决typora图片上传问题。"
 ---

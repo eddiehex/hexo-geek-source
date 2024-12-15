@@ -3,6 +3,7 @@ title: Python 中环境变量的使用
 date: 2024-11-19
 categories: 
     - Python
+tags: [Python, env]
 excerpt: "环境变量的读取和使用介绍"
 ---
 

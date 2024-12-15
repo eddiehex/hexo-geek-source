@@ -1,19 +1,61 @@
 <div class="archive-container">
-  <% let lastYear; %>
+  <% let years = {}; %>
   <% page.posts.each(function(post){ %>
     <% const year = date(post.date, 'YYYY'); %>
-    <% if (lastYear !== year){ %>
-      <% if (lastYear !== undefined){ %>
+    <% if (!years[year]) { years[year] = []; } %>
+    <% years[year].push(post); %>
+  <% }); %>
+
+  <div class="archive-years-tabs">
+    <% Object.keys(years).sort((a,b) => b - a).forEach(function(year, index){ %>
+      <button class="year-tab <%= index === 0 ? 'active' : '' %>" data-year="<%= year %>">
+        <%= year %>
+      </button>
+    <% }); %>
+  </div>
+
+  <div class="archive-content">
+    <% Object.keys(years).sort((a,b) => b - a).forEach(function(year, index){ %>
+      <div class="year-section <%= index === 0 ? 'active' : '' %>" data-year="<%= year %>">
+        <div class="month-posts">
+          <% years[year].forEach(function(post){ %>
+            <div class="post-item">
+              <span class="post-date"><%= date(post.date, 'MM.DD') %></span>
+              <a href="<%- url_for(post.path) %>" class="post-title">
+                <%= post.title %>
+              </a>
+              <% if (post.tags && post.tags.length) { %>
+                <span class="post-tags">
+                  <% post.tags.forEach(function(tag){ %>
+                    <span class="tag-item"><%= tag.name %></span>
+                  <% }) %>
+                </span>
+              <% } %>
+            </div>
+          <% }) %>
         </div>
-      <% } %>
-      <h2 class="archive-year"><%= year %></h2>
-      <div class="archive-list">
-      <% lastYear = year; %>
-    <% } %>
-    <article class="archive-item">
-      <span class="archive-date"><%= date(post.date, 'MM-DD') %></span>
-      <a href="<%- url_for(post.path) %>" class="archive-title"><%= post.title %></a>
-    </article>
-  <% }) %>
+      </div>
+    <% }); %>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.year-tab');
+  const sections = document.querySelectorAll('.year-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const year = tab.dataset.year;
+      
+      // 移除所有活动状态
+      tabs.forEach(t => t.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      
+      // 添加新的活动状态
+      tab.classList.add('active');
+      document.querySelector(`.year-section[data-year="${year}"]`).classList.add('active');
+    });
+  });
+});
+</script>
