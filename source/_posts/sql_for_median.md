@@ -4,7 +4,7 @@ date: 2024-12-13
 categories:
   - SQL
 tags: [medain]
-toc: true
+toc: false
 excerpt: "Use SQL to calculate median"
 ---
 
