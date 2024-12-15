@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Found code blocks:', codeBlocks.length);
   
   codeBlocks.forEach(pre => {
+    // 创建容器
+    const container = document.createElement('div');
+    container.className = 'code-block-container';
+    
+    // 将 pre 元素包裹在容器中
+    pre.parentNode.insertBefore(container, pre);
+    container.appendChild(pre);
+    
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.className = 'copy-button';
@@ -24,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    pre.appendChild(copyButton);
+    // 将复制按钮添加到容器中
+    container.appendChild(copyButton);
     console.log('Added copy button to code block');
   });
 }); 

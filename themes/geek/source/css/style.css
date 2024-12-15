@@ -603,20 +603,24 @@ pre {
   overflow-x: auto;
 }
 
+.code-block-container {
+  position: relative;
+  width: 100%;
+}
+
 .copy-button {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  right: 10px;
+  top: 10px;
   padding: 4px 8px;
-  font-size: 12px;
-  color: #000000;
   background-color: var(--primary-color);
   border: none;
   border-radius: 4px;
+  color: var(--bg-color);
+  font-size: 12px;
   cursor: pointer;
-  opacity: 1;
-  transition: background-color 0.3s;
-  z-index: 10;
+  transition: all 0.2s ease;
+  z-index: 12;
 }
 
 .copy-button:hover {
