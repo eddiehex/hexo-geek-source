@@ -20,7 +20,7 @@
         <div class="month-posts">
           <% years[year].forEach(function(post){ %>
             <div class="post-item">
-              <span class="post-date"><%= date(post.date, 'MM.DD') %></span>
+              <span class="post-date"><%= date(post.date, 'MM-DD') %></span>
               <a href="<%- url_for(post.path) %>" class="post-title">
                 <%= post.title %>
               </a>
