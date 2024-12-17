@@ -915,40 +915,6 @@ pre code {
   #search-input:focus {
     width: 100%;
   }
-
-  /* TOC 响应式 */
-  .toc-container {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100vh;
-    background: var(--card-bg);
-    transition: right 0.3s ease;
-    z-index: 1000;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-
-  .toc-container.active {
-    right: 0;
-  }
-
-  .toc-toggle {
-    display: block;
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    background: var(--primary-color);
-    color: var(--bg-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    z-index: 1001;
-  }
 }
 
 /* 修改导航栏相关样式 */
