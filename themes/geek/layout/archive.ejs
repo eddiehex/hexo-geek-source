@@ -6,9 +6,14 @@
     <% years[year].push(post); %>
   <% }); %>
 
-  <div class="archive-years-tabs">
+  <div class="archive-years-tabs" role="tablist">
     <% Object.keys(years).sort((a,b) => b - a).forEach(function(year, index){ %>
-      <button class="year-tab <%= index === 0 ? 'active' : '' %>" data-year="<%= year %>">
+      <button 
+        class="year-tab <%= index === 0 ? 'active' : '' %>" 
+        data-year="<%= year %>"
+        role="tab"
+        aria-selected="<%= index === 0 ? 'true' : 'false' %>"
+        aria-controls="year-<%= year %>">
         <%= year %>
       </button>
     <% }); %>
@@ -16,7 +21,12 @@
 
   <div class="archive-content">
     <% Object.keys(years).sort((a,b) => b - a).forEach(function(year, index){ %>
-      <div class="year-section <%= index === 0 ? 'active' : '' %>" data-year="<%= year %>">
+      <div 
+        id="year-<%= year %>"
+        class="year-section <%= index === 0 ? 'active' : '' %>" 
+        data-year="<%= year %>"
+        role="tabpanel"
+        aria-labelledby="tab-<%= year %>">
         <div class="month-posts">
           <% years[year].forEach(function(post){ %>
             <div class="post-item">
@@ -48,12 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
     tab.addEventListener('click', () => {
       const year = tab.dataset.year;
       
-      // 移除所有活动状态
-      tabs.forEach(t => t.classList.remove('active'));
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
       sections.forEach(s => s.classList.remove('active'));
       
-      // 添加新的活动状态
       tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       document.querySelector(`.year-section[data-year="${year}"]`).classList.add('active');
     });
   });
