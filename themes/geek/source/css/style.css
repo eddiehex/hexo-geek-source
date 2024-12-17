@@ -860,3 +860,156 @@ pre code {
     font-size: 1.5rem;
   }
 }
+
+/* 在 nav 相关样式中添加 */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* 修改响应式设计部分 */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.5rem 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .search-container {
+    margin: 0;
+    flex: 1;
+    margin: 0 1rem;
+  }
+
+  #search-input {
+    width: 100%;
+  }
+
+  #search-input:focus {
+    width: 100%;
+  }
+
+  /* TOC 响应式 */
+  .toc-container {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--card-bg);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .toc-container.active {
+    right: 0;
+  }
+
+  .toc-toggle {
+    display: block;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    background: var(--primary-color);
+    color: var(--bg-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+}
+
+/* 修改导航栏相关样式 */
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.search-container {
+  margin: 0 2rem;
+  flex: 0 1 300px; /* 限制最大宽度 */
+}
+
+/* 修改响应式设计部分 */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-container {
+    margin: 0 1rem;
+    flex: 1;
+  }
+
+  #search-input {
+    width: 100%;
+  }
+
+  #search-input:focus {
+    width: 100%;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}

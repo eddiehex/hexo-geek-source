@@ -12,10 +12,15 @@
 <body>
   <header>
     <nav>
-      <div class="logo"><a href="/"><%= config.title %></a></div>
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search...">
-        <div id="search-results"></div>
+      <div class="nav-container">
+        <div class="logo"><a href="/"><%= config.title %></a></div>
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Search...">
+          <div id="search-results"></div>
+        </div>
+        <div class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
       <ul class="nav-links">
         <li><a href="/">Posts</a></li>
@@ -31,6 +36,10 @@
     <%- body %>
   </main>
 
+  <div class="toc-toggle">
+    <i class="fas fa-list"></i>
+  </div>
+
   <footer>
     <p>
       &copy; 2024 <%= config.title %> 
@@ -45,5 +54,6 @@
   <script src="/js/copy-code.js"></script>
   <script src="/js/prism.js"></script>
   <script src="/js/toc-highlight.js"></script>
+  <script src="/js/mobile-menu.js"></script>
 </body>
 </html>
