@@ -2,10 +2,11 @@
 title: Feature Engineering by Python and Pyspark
 date: 2025-01-24
 categories:
-  - {optional}
-tags: [{optional}]
+  - Python
+  - ML
+tags: [Python,PySpark]
 toc: true
-excerpt: "{optional}"
+excerpt: "特征工程操作及python和pyspark实现"
 ---
 
 特征工程是机器学习流程中至关重要的环节，直接影响模型性能。以下是详细的步骤说明及对应的Python/PySpark实现代码：
