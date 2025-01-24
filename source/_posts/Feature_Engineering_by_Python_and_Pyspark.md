@@ -2,7 +2,6 @@
 title: Feature Engineering by Python and Pyspark
 date: 2025-01-24
 categories:
-  - Python
   - ML
 tags: [Python,PySpark]
 toc: true
