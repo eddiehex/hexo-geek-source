@@ -123,15 +123,18 @@
 @media (max-width: 768px) {
   .page-container {
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0;
   }
   
   .toc-card {
-    position: relative;
+    display: none; /* 隐藏TOC */
+  }
+
+  .page-content {
     width: 100%;
-    top: 0;
-    margin-bottom: 1rem;
-    max-height: none;
+    max-width: 100%;
+    margin: 0;
+    padding: 1rem;
   }
 } 
 
@@ -146,4 +149,4 @@
     color: #42b983;
     font-weight: bold;
     transform: translateX(5px);
-} 
+}
