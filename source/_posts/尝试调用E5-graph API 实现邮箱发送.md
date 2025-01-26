@@ -3,7 +3,6 @@ title: 尝试调用E5-graph API 实现邮箱发送
 date: 2023-11-01
 categories: 
   - Python
-  - API
 tags: [python,API]
 toc: true
 excerpt: "通过调用E5-graph API，实现自动化邮箱发送功能。本指南涵盖了从API配置到邮件发送的详细步骤，适合希望简化邮件发送流程的开发者。"

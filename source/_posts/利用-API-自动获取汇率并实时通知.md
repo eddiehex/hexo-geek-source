@@ -3,7 +3,6 @@ title: 利用 API 自动获取汇率并实时通知
 date: 2023-11-01
 categories: 
   - Python
-  - API
 tags: [python, api]
 toc: true
 excerpt: "Learn how to automatically fetch exchange rates using an API and send real-time notifications. This guide covers the setup and implementation of a Python script to keep you updated with the latest currency exchange rates."

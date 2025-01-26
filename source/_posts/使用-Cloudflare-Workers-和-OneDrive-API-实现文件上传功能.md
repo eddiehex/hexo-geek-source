@@ -3,7 +3,6 @@ title: 使用 Cloudflare Workers 和 OneDrive API 实现文件上传功能
 date: 2023-11-01
 categories: 
   - Javascript
-  - Workers
 tags: [api, js, cloudflare, onedrive]
 toc: true
 excerpt: "Learn how to implement file upload functionality using Cloudflare Workers and OneDrive API. This guide provides step-by-step instructions for setting up and integrating these services to enable efficient file uploads."

@@ -2,8 +2,7 @@
 title: 修改hexo代码块主题样式
 date: 2024-11-20
 categories: 
-  - css
-  - js
+  - Hexo
 tags: [hexo, js, css]
 toc: true
 excerpt: "The article describes the process of redeploying a Hexo blog and customizing its theme. Issues with code block rendering using the prism library were resolved by removing the hexo-prism-plugin, disabling Hexo's built-in highlighting, and manually integrating prism.js and prism.css. Configuration changes were made in _config.yml and layout.ejs to ensure proper code block display."

@@ -3,7 +3,6 @@ title: python构建通知api服务
 date: 2023-11-01
 categories: 
   - Python
-  - API
 tags: [api, flask, nginx, python]
 toc: true
 excerpt: "Learn how to build a notification API service using Python. This guide provides step-by-step instructions for setting up and deploying a notification service with Flask and Nginx."
