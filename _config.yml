@@ -63,6 +63,18 @@ highlight:
   enable: false
 prismjs:
   enable: true
+
+# Math rendering
+math:
+  engine: 'mathjax'
+  mathjax:
+    src: https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
+    config:
+      tex:
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        processEscapes: true
+
 # 在适当的位置添加以下配置
 # 如果已有 scripts 配置，只需添加新的路径
 scripts:

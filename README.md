@@ -189,3 +189,90 @@ This project is open source and available under the [MIT License](LICENSE).
 **Happy blogging!** 🚀
 
 For questions or support, please [open an issue](https://github.com/eddiehex/hexo-geek-source/issues).
+
+## Mathematical Formulas
+
+This theme supports mathematical formulas using MathJax. You can use both inline and display math:
+
+**Inline math**: Use `$formula$` or `\(formula\)`
+Example: `$E = mc^2$` renders as $E = mc^2$
+
+**Display math**: Use `$$formula$$` or `\[formula\]`
+Example:
+```
+$$
+\frac{\sum_{i \in j} g_i}{\sum_{i \in j} h_i + \lambda}
+$$
+```
+
+## Recent Updates
+
+### Version 2.0 - UI/UX Enhancements
+- ✅ **Simplified Categories**: One-page view with collapsible sections
+- ✅ **Enhanced Code Highlighting**: Professional color scheme (Monokai-inspired)
+- ✅ **Improved Search**: Better UI with proper color schemes
+- ✅ **Mathematical Formula Support**: MathJax integration for LaTeX formulas
+- ✅ **Modern TOC**: Redesigned table of contents with dark theme
+- ✅ **Performance Optimizations**: Faster loading and better animations
+
+### Version 1.0 - Initial Release
+- Modern dark theme with lime green accents
+- Responsive design and mobile optimization
+- Enhanced typography and code blocks
+- Search functionality and navigation improvements
+
+## Customization
+
+### Colors
+The theme uses CSS custom properties for easy customization. Main colors are defined in `/themes/geek/source/css/style.css`:
+
+```css
+:root {
+  --primary-color: #7fff00;
+  --bg-color: #0a0a0a;
+  --card-bg: #111111;
+  --text-color: #ffffff;
+  /* ... more variables */
+}
+```
+
+### Features Toggle
+You can enable/disable features in your site's `_config.yml`:
+
+```yaml
+# Search functionality
+search:
+  path: search.json
+  field: post
+
+# Code highlighting
+prismjs:
+  enable: true
+
+# Math rendering
+math:
+  engine: 'mathjax'
+```
+
+## Development
+
+To contribute to this theme:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.
+
+## Support
+
+If you encounter any issues or have suggestions, please open an issue on GitHub.
+
+---
+
+**Author**: Eddie Ho  
+**Repository**: [hexo-geek-source](https://github.com/eddiehex/hexo-geek-source)

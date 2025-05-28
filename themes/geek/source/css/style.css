@@ -212,7 +212,11 @@ nav {
   transition: var(--transition);
   display: block;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color) !important;
+}
+
+.search-result-item:visited {
+  color: var(--text-color) !important;
 }
 
 .search-result-item:last-child {
@@ -222,10 +226,11 @@ nav {
 .search-result-item:hover {
   background: rgba(127, 255, 0, 0.1);
   transform: translateX(4px);
+  color: var(--text-color) !important;
 }
 
 .search-result-title {
-  color: var(--text-color);
+  color: var(--text-color) !important;
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -1144,22 +1149,118 @@ pre code {
 .page-body .math {
   overflow-x: auto;
   margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  text-align: center;
 }
 
-.page-body .footnotes {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 2px solid var(--border-color);
-  font-size: 0.9rem;
-  color: var(--text-muted);
+/* MathJax styling */
+.MathJax {
+  color: var(--text-color) !important;
 }
 
-.page-body mark {
-  background: rgba(127, 255, 0, 0.3);
-  color: var(--bg-color);
+.MathJax_Display {
+  margin: 1rem 0 !important;
+  color: var(--text-color) !important;
+}
+
+mjx-container {
+  color: var(--text-color) !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+mjx-container[display="true"] {
+  margin: 1.5rem 0 !important;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+}
+
+mjx-container[display="true"]:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Inline math */
+mjx-container:not([display="true"]) {
+  color: var(--text-color) !important;
+  background: rgba(127, 255, 0, 0.05);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-weight: 600;
+  margin: 0 0.2rem;
+}
+
+/* Math error styling */
+.mjx-error {
+  color: #ff6b6b !important;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ff6b6b;
+  margin: 0.5rem 0;
+}
+
+/* MathJax menu styling */
+#MathJax_Menu {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+#MathJax_Menu .MathJax_MenuItem {
+  color: var(--text-color) !important;
+}
+
+#MathJax_Menu .MathJax_MenuItem:hover {
+  background: var(--card-bg-hover) !important;
+  color: var(--primary-color) !important;
+}
+
+/* Special math environments */
+.page-body .math-block {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  box-shadow: var(--shadow-light);
+}
+
+.page-body .math-block:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Equation numbering */
+.mjx-math .mjx-mrow .mjx-mn {
+  color: var(--primary-color) !important;
+}
+
+/* Fraction styling */
+.mjx-math .mjx-mfrac > * {
+  color: var(--text-color) !important;
+}
+
+/* Matrix and array styling */
+.mjx-math .mjx-mtable {
+  color: var(--text-color) !important;
+}
+
+/* Math operators */
+.mjx-math .mjx-mo {
+  color: var(--text-secondary) !important;
+}
+
+/* Variables and identifiers */
+.mjx-math .mjx-mi {
+  color: var(--text-color) !important;
+  font-style: italic;
 }
 
 /* Archive */
@@ -1652,4 +1753,20 @@ footer a:hover {
     --card-bg: #111111;
     --border-color: #555555;
   }
+}
+
+.page-body .footnotes {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.page-body mark {
+  background: rgba(127, 255, 0, 0.3);
+  color: var(--bg-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
 }

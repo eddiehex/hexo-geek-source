@@ -6,71 +6,114 @@
     </p>
   </div>
 
-  <!-- All Categories with Posts -->
-  <div class="categories-list">
+  <!-- Collapsible Categories List -->
+  <div class="categories-accordion">
     <% site.categories.each(function(category){ %>
-      <div class="category-section">
-        <div class="category-header-info">
-          <div class="category-icon">
-            <i class="fas fa-folder"></i>
+      <div class="category-accordion-item">
+        <div class="category-accordion-header" onclick="toggleCategory(this)">
+          <div class="category-info">
+            <div class="category-icon">
+              <i class="fas fa-folder"></i>
+            </div>
+            <div class="category-meta">
+              <h3 class="category-name"><%= category.name %></h3>
+              <span class="category-count">
+                <%= category.posts.length %> <%= category.posts.length === 1 ? 'post' : 'posts' %>
+              </span>
+            </div>
           </div>
-          <div class="category-meta">
-            <h2 class="category-name"><%= category.name %></h2>
-            <p class="category-count">
-              <%= category.posts.length %> <%= category.posts.length === 1 ? 'post' : 'posts' %>
-            </p>
+          <div class="category-toggle">
+            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         
-        <div class="category-posts">
-          <% category.posts.each(function(post){ %>
-            <article class="category-post-item">
-              <div class="post-meta">
-                <span class="post-date">
-                  <i class="fas fa-calendar"></i>
-                  <%= date(post.date, 'YYYY-MM-DD') %>
-                </span>
-                <% if(post.tags && post.tags.length){ %>
-                  <div class="post-tags">
-                    <% post.tags.forEach(function(tag, i) { %>
-                      <% if (i < 2) { %>
-                        <span class="tag"><%= tag.name %></span>
-                      <% } %>
-                    <% }); %>
+        <div class="category-accordion-content">
+          <div class="category-posts-list">
+            <% category.posts.each(function(post){ %>
+              <article class="category-post-item">
+                <div class="post-info">
+                  <h4 class="post-title">
+                    <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                  </h4>
+                  <div class="post-meta">
+                    <span class="post-date">
+                      <i class="fas fa-calendar"></i>
+                      <%= date(post.date, 'YYYY-MM-DD') %>
+                    </span>
+                    <% if(post.tags && post.tags.length){ %>
+                      <div class="post-tags">
+                        <% post.tags.forEach(function(tag, i) { %>
+                          <% if (i < 3) { %>
+                            <span class="tag"><%= tag.name %></span>
+                          <% } %>
+                        <% }); %>
+                        <% if (post.tags.length > 3) { %>
+                          <span class="tag-more">+<%= post.tags.length - 3 %></span>
+                        <% } %>
+                      </div>
+                    <% } %>
                   </div>
-                <% } %>
-              </div>
-              <h3 class="post-title">
-                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-              </h3>
-              <div class="post-excerpt">
-                <% if(post.excerpt) { %>
-                  <%- strip_html(post.excerpt).substring(0, 120) %>...
-                <% } else if(post.content) { %>
-                  <%- strip_html(post.content).substring(0, 120) %>...
-                <% } %>
-              </div>
-              <div class="post-actions">
-                <span class="read-time">
-                  <i class="fas fa-clock"></i>
-                  <% const wordCount = strip_html(post.content).split(' ').length; %>
-                  <% const readTime = Math.max(1, Math.ceil(wordCount / 200)); %>
-                  <%= readTime %> min read
-                </span>
-                <a href="<%- url_for(post.path) %>" class="read-more-link">
-                  Read More <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </article>
-          <% }) %>
+                  <div class="post-excerpt">
+                    <% if(post.excerpt) { %>
+                      <%- strip_html(post.excerpt).substring(0, 150) %>...
+                    <% } else if(post.content) { %>
+                      <%- strip_html(post.content).substring(0, 150) %>...
+                    <% } %>
+                  </div>
+                  <div class="post-actions">
+                    <span class="read-time">
+                      <i class="fas fa-clock"></i>
+                      <% const wordCount = strip_html(post.content).split(' ').length; %>
+                      <% const readTime = Math.max(1, Math.ceil(wordCount / 200)); %>
+                      <%= readTime %> min read
+                    </span>
+                    <a href="<%- url_for(post.path) %>" class="read-more-link">
+                      Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
+          </div>
         </div>
       </div>
     <% }) %>
   </div>
 </div>
 
+<script>
+function toggleCategory(header) {
+  const item = header.parentElement;
+  const content = item.querySelector('.category-accordion-content');
+  const icon = header.querySelector('.category-toggle i');
+  
+  const isExpanded = item.classList.contains('expanded');
+  
+  // Close all other categories
+  document.querySelectorAll('.category-accordion-item.expanded').forEach(otherItem => {
+    if (otherItem !== item) {
+      otherItem.classList.remove('expanded');
+      otherItem.querySelector('.category-accordion-content').style.maxHeight = '0';
+      otherItem.querySelector('.category-toggle i').style.transform = 'rotate(0deg)';
+    }
+  });
+  
+  if (isExpanded) {
+    // Close current category
+    item.classList.remove('expanded');
+    content.style.maxHeight = '0';
+    icon.style.transform = 'rotate(0deg)';
+  } else {
+    // Open current category
+    item.classList.add('expanded');
+    content.style.maxHeight = content.scrollHeight + 'px';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
+
 <style>
-/* Simplified Category Styles */
+/* Collapsible Categories Styles */
 .category-header {
   text-align: center;
   margin-bottom: 4rem;
@@ -84,42 +127,58 @@
   margin: 1rem auto 0 auto;
 }
 
-.categories-list {
+.categories-accordion {
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.category-section {
+.category-accordion-item {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   overflow: hidden;
   transition: var(--transition);
 }
 
-.category-section:hover {
+.category-accordion-item:hover {
   border-color: var(--primary-color);
   box-shadow: var(--shadow-light);
 }
 
-.category-header-info {
+.category-accordion-item.expanded {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+}
+
+.category-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--card-bg);
+}
+
+.category-accordion-header:hover {
+  background: var(--card-bg-hover);
+}
+
+.category-info {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 2rem;
-  background: rgba(127, 255, 0, 0.05);
-  border-bottom: 1px solid var(--border-color);
 }
 
 .category-icon {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--primary-color);
 }
 
 .category-name {
   color: var(--text-color);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
@@ -127,18 +186,33 @@
 .category-count {
   color: var(--text-muted);
   font-size: 0.9rem;
-  margin: 0;
 }
 
-.category-posts {
-  padding: 1rem;
+.category-toggle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.category-toggle i {
+  transition: transform 0.3s ease;
+}
+
+.category-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: rgba(127, 255, 0, 0.02);
+}
+
+.category-posts-list {
+  padding: 1rem 0;
 }
 
 .category-post-item {
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
+  padding: 1.5rem 2rem;
   border-bottom: 1px solid rgba(127, 255, 0, 0.1);
+  transition: var(--transition);
 }
 
 .category-post-item:last-child {
@@ -146,20 +220,36 @@
 }
 
 .category-post-item:hover {
-  background: var(--card-bg-hover);
+  background: rgba(127, 255, 0, 0.05);
   transform: translateX(8px);
 }
 
-.category-post-item .post-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.post-title {
   margin-bottom: 0.8rem;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
-.category-post-item .post-date {
+.post-title a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: var(--transition);
+  line-height: 1.3;
+}
+
+.post-title a:hover {
+  color: var(--primary-color);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.post-date {
   color: var(--text-muted);
   font-size: 0.85rem;
   display: flex;
@@ -167,12 +257,13 @@
   gap: 0.3rem;
 }
 
-.category-post-item .post-tags {
+.post-tags {
   display: flex;
   gap: 0.3rem;
+  align-items: center;
 }
 
-.category-post-item .tag {
+.tag {
   background: rgba(127, 255, 0, 0.1);
   color: var(--primary-color);
   padding: 0.15rem 0.4rem;
@@ -181,34 +272,31 @@
   font-weight: 500;
 }
 
-.category-post-item .post-title {
-  margin-bottom: 0.8rem;
+.tag-more {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-style: italic;
 }
 
-.category-post-item .post-title a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 600;
-  transition: var(--transition);
-  line-height: 1.3;
-}
-
-.category-post-item .post-title a:hover {
-  color: var(--primary-color);
-}
-
-.category-post-item .post-excerpt {
+.post-excerpt {
   color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
 
-.category-post-item .post-actions {
+.post-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.read-time {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
 
 .read-more-link {
@@ -235,25 +323,27 @@
 }
 
 @media (max-width: 768px) {
-  .category-header-info {
-    padding: 1.5rem;
+  .category-accordion-header {
+    padding: 1rem 1.5rem;
   }
   
-  .category-posts {
-    padding: 0.5rem;
-  }
-  
-  .category-post-item {
-    padding: 1rem;
-  }
-  
-  .category-post-item .post-meta {
+  .category-info {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
   
-  .category-post-item .post-actions {
+  .category-post-item {
+    padding: 1rem 1.5rem;
+  }
+  
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .post-actions {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.8rem;
