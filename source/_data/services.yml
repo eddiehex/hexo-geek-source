@@ -23,17 +23,13 @@
   icon: fas fa-desktop
   url: https://cloud.kygoho.win/
 
-- name: Chat-GPT
-  description: AI Chat bot
-  icon: fas fa-robot
-  url: https://sgp-web.423327.xyz/
-
-- name: Video List
-  description: Video Exist Checking
-  icon: fas fa-video
-  url: https://one.wadaho.cf/
 
 - name: Image Hosting
   description: Image Hosting Service
   icon: fas fa-cloud-upload-alt
   url: https://up.423327.xyz
+
+- name: Collection
+  description: Collection of some sites
+  icon: fas fa-folder
+  url: https://charons.news
