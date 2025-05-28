@@ -1,41 +1,292 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to <%= config.title %></h1>
+    <p class="hero-subtitle"><%= config.description || "A minimalist geek theme for modern developers" %></p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number"><%= page.posts.length %></span>
+        <span class="stat-label">Posts</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number"><%= site.categories.length %></span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number"><%= site.tags.length %></span>
+        <span class="stat-label">Tags</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="posts-container">
-  <% page.posts.each(function(post){ %>
-    <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date"><i class="fas fa-calendar"></i> <%= date(post.date, 'YYYY-MM-DD') %></span>
-        <% if(post.categories && post.categories.length){ %>
-          <span class="post-categories">
-            <i class="fas fa-folder"></i>
-            <%- list_categories(post.categories, { show_count: false, style: 'none', separator: ', ' }) %>
-          </span>
-        <% } %>
+  <!-- Featured Posts Section -->
+  <% if (page.posts.length > 0) { %>
+    <section class="featured-posts">
+      <h2 class="section-title">Latest Posts</h2>
+      <div class="posts-grid">
+        <% page.posts.each(function(post, index){ %>
+          <article class="post-card <%= index === 0 ? 'featured-post' : '' %>">
+            <div class="post-header">
+              <div class="post-meta">
+                <span class="post-date">
+                  <i class="fas fa-calendar"></i> 
+                  <%= date(post.date, 'YYYY-MM-DD') %>
+                </span>
+                <% if(post.categories && post.categories.length){ %>
+                  <span class="post-categories">
+                    <i class="fas fa-folder"></i>
+                    <%- list_categories(post.categories, { show_count: false, style: 'none', separator: ', ' }) %>
+                  </span>
+                <% } %>
+                <% if(post.tags && post.tags.length){ %>
+                  <span class="post-tags-preview">
+                    <i class="fas fa-tags"></i>
+                    <% post.tags.forEach(function(tag, i) { %>
+                      <% if (i < 2) { %>
+                        <span class="tag"><%= tag.name %></span>
+                      <% } %>
+                    <% }); %>
+                    <% if (post.tags.length > 2) { %>
+                      <span class="tag-more">+<%= post.tags.length - 2 %></span>
+                    <% } %>
+                  </span>
+                <% } %>
+              </div>
+            </div>
+            
+            <div class="post-content-wrapper">
+              <h2 class="post-title">
+                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+              </h2>
+              
+              <div class="post-excerpt">
+                <% if(post.excerpt) { %>
+                  <%- strip_html(post.excerpt).substring(0, 200) %>...
+                <% } else if(post.content) { %>
+                  <%- strip_html(post.content).substring(0, 200) %>...
+                <% } %>
+              </div>
+              
+              <div class="post-footer">
+                <div class="read-info">
+                  <span class="read-time">
+                    <i class="fas fa-clock"></i>
+                    <% const wordCount = strip_html(post.content).split(' ').length; %>
+                    <% const readTime = Math.max(1, Math.ceil(wordCount / 200)); %>
+                    <%= readTime %> min read
+                  </span>
+                </div>
+                <a href="<%- url_for(post.path) %>" class="read-more">
+                  <span>Read More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        <% }) %>
       </div>
-      <h2 class="post-title">
-        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-      </h2>
-      <div class="post-content">
-        <% if(post.excerpt) { %>
-          <%- post.excerpt %>
-        <% } else { %>
-          <%- post.content %>
-        <% } %>
+    </section>
+  <% } else { %>
+    <section class="empty-state">
+      <div class="empty-content">
+        <i class="fas fa-file-alt empty-icon"></i>
+        <h3>No Posts Yet</h3>
+        <p>Start writing your first post to see it here!</p>
       </div>
-      <div class="post-footer">
-        <a href="<%- url_for(post.path) %>" class="read-more">
-          <span>Read More</span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </article>
-  <% }) %>
+    </section>
+  <% } %>
   
+  <!-- Pagination -->
   <% if (page.total > 1){ %>
     <nav class="pagination">
       <%- paginator({
-        prev_text: '<i class="fas fa-chevron-left"></i>',
-        next_text: '<i class="fas fa-chevron-right"></i>',
-        escape: false
+        prev_text: '<i class="fas fa-chevron-left"></i> Previous',
+        next_text: 'Next <i class="fas fa-chevron-right"></i>',
+        escape: false,
+        show_all: false,
+        end_size: 1,
+        mid_size: 2
       }) %>
     </nav>
   <% } %>
 </div>
+
+<style>
+/* Hero Section Styles */
+.hero-section {
+  background: linear-gradient(135deg, var(--bg-color) 0%, #0d0d0d 100%);
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.posts-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.featured-post {
+  grid-column: 1 / -1;
+}
+
+.post-tags-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-tags-preview .tag {
+  background: rgba(127, 255, 0, 0.1);
+  color: var(--primary-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.tag-more {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.read-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.read-time {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.empty-content h3 {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.empty-content p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-stats {
+    gap: 2rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 2rem 0;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .hero-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+}
+</style>
