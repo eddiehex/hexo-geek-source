@@ -4,7 +4,7 @@ date: 2025-04-20
 categories:
   - Statistics
 tags: [Statistics, MLE]
-toc: true
+toc: false
 excerpt: "统计分布和MLE的构建"
 ---
 

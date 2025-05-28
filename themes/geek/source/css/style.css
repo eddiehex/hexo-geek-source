@@ -1148,21 +1148,79 @@ pre code {
 
 .page-body .math {
   overflow-x: auto;
-  margin: 1.5rem 0;
-  padding: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   text-align: center;
+  box-shadow: var(--shadow-light);
 }
 
-/* MathJax styling */
+.page-body .math:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+}
+
+/* 确保页面内容中的数学公式正确显示 */
+.page-body mjx-container[display="true"] {
+  margin: 2rem auto !important;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  text-align: center;
+  overflow-x: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.page-body mjx-container:not([display="true"]) {
+  background: rgba(127, 255, 0, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin: 0 0.15rem;
+  vertical-align: baseline;
+}
+
+/* 修复列表中的数学公式 */
+.page-body li mjx-container[display="true"] {
+  margin: 1rem 0 !important;
+}
+
+.page-body li mjx-container:not([display="true"]) {
+  margin: 0 0.1rem;
+}
+
+/* 段落中的数学公式对齐 */
+.page-body p mjx-container:not([display="true"]) {
+  vertical-align: middle;
+}
+
+/* 确保长公式在移动设备上可滚动 */
+@media (max-width: 768px) {
+  .page-body .math {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .page-body mjx-container[display="true"] {
+    padding: 1rem;
+    margin: 1.5rem 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* MathJax styling - 修复布局问题 */
 .MathJax {
   color: var(--text-color) !important;
 }
 
 .MathJax_Display {
-  margin: 1rem 0 !important;
+  margin: 2rem 0 !important;
   color: var(--text-color) !important;
 }
 
@@ -1170,15 +1228,23 @@ mjx-container {
   color: var(--text-color) !important;
   overflow-x: auto;
   overflow-y: hidden;
+  line-height: 1.6;
+  font-family: "Times New Roman", "STIX Two Math", serif !important;
 }
 
+/* 块级数学公式 */
 mjx-container[display="true"] {
-  margin: 1.5rem 0 !important;
-  padding: 1rem;
+  margin: 2rem 0 !important;
+  padding: 1.5rem;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-light);
+  text-align: center !important;
+  overflow-x: auto;
+  max-width: 100%;
+  width: 100% !important;
+  display: block !important;
 }
 
 mjx-container[display="true"]:hover {
@@ -1186,13 +1252,83 @@ mjx-container[display="true"]:hover {
   box-shadow: var(--shadow-medium);
 }
 
-/* Inline math */
+/* 内联数学公式 */
 mjx-container:not([display="true"]) {
   color: var(--text-color) !important;
   background: rgba(127, 255, 0, 0.05);
-  padding: 0.2rem 0.4rem;
+  padding: 0.1rem 0.3rem;
   border-radius: 4px;
-  margin: 0 0.2rem;
+  margin: 0 0.1rem;
+  display: inline-block;
+  vertical-align: -0.2em !important;
+  line-height: inherit !important;
+}
+
+/* 修复长公式的显示 */
+mjx-math {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  display: inline-block;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+mjx-container[display="true"] mjx-math {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+}
+
+/* 分数和根式的改进 */
+mjx-mfrac {
+  margin: 0.2rem 0 !important;
+}
+
+mjx-msqrt {
+  margin: 0 0.1rem !important;
+}
+
+/* 上下标的间距 */
+mjx-msup, mjx-msub, mjx-msubsup {
+  margin: 0 0.05rem !important;
+}
+
+/* 括号的改进 */
+mjx-mo[data-semantic-type="fence"] {
+  margin: 0 0.1rem !important;
+  color: var(--text-color) !important;
+  font-size: 1.2em !important;
+}
+
+/* 求和、积分等大型操作符 */
+mjx-mo[data-semantic-type="largeop"] {
+  margin: 0 0.2rem !important;
+}
+
+/* 矩阵和表格 */
+mjx-mtable {
+  margin: 0.5rem 0 !important;
+}
+
+mjx-mtd {
+  padding: 0.3rem 0.5rem !important;
+}
+
+/* 响应式数学公式 */
+@media (max-width: 768px) {
+  mjx-container[display="true"] {
+    padding: 1rem;
+    margin: 1.5rem 0 !important;
+    font-size: 0.9rem;
+  }
+  
+  mjx-container[display="true"] mjx-math {
+    font-size: 0.95rem !important;
+  }
+  
+  mjx-container:not([display="true"]) {
+    padding: 0.05rem 0.2rem;
+    margin: 0 0.05rem;
+  }
 }
 
 /* Math error styling */
@@ -1769,4 +1905,96 @@ footer a:hover {
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-weight: 600;
+}
+
+/* 数学公式全局修复 */
+mjx-container {
+  color: var(--text-color) !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: 1.6;
+  font-family: "Times New Roman", "STIX Two Math", serif !important;
+}
+
+/* 确保数学公式不被其他样式覆盖 */
+.page-body mjx-container,
+.post-content mjx-container,
+.page-content mjx-container {
+  color: var(--text-color) !important;
+  font-size: inherit !important;
+}
+
+/* 修复数学公式的行内显示 */
+mjx-container:not([display="true"]) {
+  line-height: inherit !important;
+  vertical-align: -0.2em !important;
+}
+
+/* 修复块级数学公式的居中显示 */
+mjx-container[display="true"] {
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* 数学公式内的元素间距优化 */
+mjx-math {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* 修复数学公式中的特殊符号 */
+mjx-mo {
+  font-family: "STIX Two Math", "Times New Roman", serif !important;
+}
+
+mjx-mi {
+  font-family: "STIX Two Math", "Times New Roman", serif !important;
+  font-style: italic !important;
+}
+
+mjx-mn {
+  font-family: "STIX Two Math", "Times New Roman", serif !important;
+  color: var(--primary-color) !important;
+}
+
+/* 修复分数线和根号的显示 */
+mjx-mfrac > mjx-frac-line {
+  border-color: var(--text-color) !important;
+}
+
+mjx-msqrt > mjx-sqrt-line {
+  border-color: var(--text-color) !important;
+}
+
+/* 修复矩阵和括号 */
+mjx-mo[data-semantic-type="fence"] {
+  color: var(--text-color) !important;
+  font-size: 1.2em !important;
+}
+
+/* 防止数学公式被代码样式影响 */
+pre mjx-container,
+code mjx-container {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  color: var(--text-color) !important;
+}
+
+/* 确保数学公式在暗色主题下可见 */
+mjx-container * {
+  color: inherit !important;
+}
+
+/* 修复公式前后的空白处理 */
+.page-body p mjx-container[display="true"] {
+  margin: 1.5rem 0 !important;
+  display: block !important;
+}
+
+/* 修复列表项中的数学公式 */
+.page-body li > mjx-container[display="true"] {
+  margin: 1rem 0 !important;
+  display: block !important;
 }
