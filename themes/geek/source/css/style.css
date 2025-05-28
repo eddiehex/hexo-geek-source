@@ -374,8 +374,23 @@ main {
 
 .post-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  margin-top: 1.5rem;
+}
+
+.read-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.read-time {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
 
 .read-more {
@@ -617,28 +632,80 @@ main {
 }
 
 .page-body pre {
-  background: var(--card-bg);
+  position: relative;
+  background: #1a1a1a !important;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 1.5rem;
   margin: 1.5rem 0;
   overflow-x: auto;
+  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.code-block-container {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.copy-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #cccccc;
+  border: 1px solid #444444;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: #666666;
+  transform: scale(1.05);
+}
+
+code {
+  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e6e6e6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.9rem;
+  word-break: normal;
 }
 
 .page-body code {
   font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas,
     'Courier New', monospace;
   font-size: 0.9em;
-  background: rgba(127, 255, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  color: var(--primary-color);
+  color: #e6e6e6;
 }
 
 .page-body p code {
-  background: rgba(127, 255, 0, 0.15);
-  color: var(--primary-color);
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  color: #f0f0f0;
+  font-weight: 500;
 }
 
 .page-body table {
@@ -1020,67 +1087,6 @@ footer a:hover {
   color: var(--hover-color);
   background: rgba(127, 255, 0, 0.1);
   transform: scale(1.1);
-}
-
-/* Code Blocks */
-pre {
-  position: relative;
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  overflow-x: auto;
-  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-}
-
-.code-block-container {
-  position: relative;
-  margin: 1.5rem 0;
-}
-
-.copy-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(127, 255, 0, 0.1);
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  border-radius: var(--border-radius);
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 10;
-}
-
-.copy-button:hover {
-  background: var(--primary-color);
-  color: var(--bg-color);
-  transform: scale(1.05);
-}
-
-code {
-  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  background: rgba(127, 255, 0, 0.1);
-  color: var(--primary-color);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-weight: 500;
-  word-break: break-word;
-}
-
-pre code {
-  background: transparent;
-  color: inherit;
-  padding: 0;
-  border-radius: 0;
-  font-size: 0.9rem;
-  word-break: normal;
 }
 
 /* Image Modal */
