@@ -1,130 +1,80 @@
 <div class="category-container">
   <div class="category-header">
-    <h1 class="category-title">
-      <% if (is_category()) { %>
-        <span class="category-breadcrumb">Category</span>
-        <%= page.category %>
-      <% } else { %>
-        All Categories
-      <% } %>
-    </h1>
-    <% if (is_category()) { %>
-      <p class="category-description">
-        Explore <%= site.categories.findOne({name: page.category}).posts.length %> posts in this category
-      </p>
-    <% } else { %>
-      <p class="category-description">
-        Discover content organized by topics and themes
-      </p>
-    <% } %>
+    <h1 class="category-title">All Categories</h1>
+    <p class="category-description">
+      Discover content organized by topics and themes
+    </p>
   </div>
 
-  <% if (is_category()) { %>
-    <!-- Single Category View -->
-    <div class="single-category-view">
-      <div class="back-navigation">
-        <a href="/categories" class="back-link">
-          <i class="fas fa-arrow-left"></i>
-          Back to All Categories
-        </a>
-      </div>
-      
-      <div class="category-posts-grid">
-        <% site.categories.findOne({name: page.category}).posts.each(function(post){ %>
-          <article class="category-post-card">
-            <div class="post-meta">
-              <span class="post-date">
-                <i class="fas fa-calendar"></i>
-                <%= date(post.date, 'YYYY-MM-DD') %>
-              </span>
-              <% if(post.tags && post.tags.length){ %>
-                <div class="post-tags">
-                  <% post.tags.forEach(function(tag, i) { %>
-                    <% if (i < 3) { %>
-                      <span class="tag"><%= tag.name %></span>
-                    <% } %>
-                  <% }); %>
-                </div>
-              <% } %>
-            </div>
-            <h3 class="post-title">
-              <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-            </h3>
-            <div class="post-excerpt">
-              <% if(post.excerpt) { %>
-                <%- strip_html(post.excerpt).substring(0, 150) %>...
-              <% } else if(post.content) { %>
-                <%- strip_html(post.content).substring(0, 150) %>...
-              <% } %>
-            </div>
-            <div class="post-footer">
-              <span class="read-time">
-                <i class="fas fa-clock"></i>
-                <% const wordCount = strip_html(post.content).split(' ').length; %>
-                <% const readTime = Math.max(1, Math.ceil(wordCount / 200)); %>
-                <%= readTime %> min read
-              </span>
-              <a href="<%- url_for(post.path) %>" class="read-more-link">
-                Read More <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-          </article>
-        <% }) %>
-      </div>
-    </div>
-  <% } else { %>
-    <!-- All Categories Grid View -->
-    <div class="categories-grid">
-      <% site.categories.each(function(category){ %>
-        <div class="category-card">
+  <!-- All Categories with Posts -->
+  <div class="categories-list">
+    <% site.categories.each(function(category){ %>
+      <div class="category-section">
+        <div class="category-header-info">
           <div class="category-icon">
             <i class="fas fa-folder"></i>
           </div>
-          <div class="category-info">
-            <h3 class="category-name">
-              <a href="<%- url_for(category.path) %>"><%= category.name %></a>
-            </h3>
+          <div class="category-meta">
+            <h2 class="category-name"><%= category.name %></h2>
             <p class="category-count">
               <%= category.posts.length %> <%= category.posts.length === 1 ? 'post' : 'posts' %>
             </p>
-            <div class="category-preview">
-              <% category.posts.limit(3).each(function(post, index){ %>
-                <span class="preview-post">
-                  <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-                </span>
-              <% }) %>
-              <% if (category.posts.length > 3) { %>
-                <span class="more-posts">
-                  +<%= category.posts.length - 3 %> more
-                </span>
-              <% } %>
-            </div>
-          </div>
-          <div class="category-action">
-            <a href="<%- url_for(category.path) %>" class="explore-category">
-              Explore <i class="fas fa-arrow-right"></i>
-            </a>
           </div>
         </div>
-      <% }) %>
-    </div>
-  <% } %>
+        
+        <div class="category-posts">
+          <% category.posts.each(function(post){ %>
+            <article class="category-post-item">
+              <div class="post-meta">
+                <span class="post-date">
+                  <i class="fas fa-calendar"></i>
+                  <%= date(post.date, 'YYYY-MM-DD') %>
+                </span>
+                <% if(post.tags && post.tags.length){ %>
+                  <div class="post-tags">
+                    <% post.tags.forEach(function(tag, i) { %>
+                      <% if (i < 2) { %>
+                        <span class="tag"><%= tag.name %></span>
+                      <% } %>
+                    <% }); %>
+                  </div>
+                <% } %>
+              </div>
+              <h3 class="post-title">
+                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+              </h3>
+              <div class="post-excerpt">
+                <% if(post.excerpt) { %>
+                  <%- strip_html(post.excerpt).substring(0, 120) %>...
+                <% } else if(post.content) { %>
+                  <%- strip_html(post.content).substring(0, 120) %>...
+                <% } %>
+              </div>
+              <div class="post-actions">
+                <span class="read-time">
+                  <i class="fas fa-clock"></i>
+                  <% const wordCount = strip_html(post.content).split(' ').length; %>
+                  <% const readTime = Math.max(1, Math.ceil(wordCount / 200)); %>
+                  <%= readTime %> min read
+                </span>
+                <a href="<%- url_for(post.path) %>" class="read-more-link">
+                  Read More <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 </div>
 
 <style>
-/* Enhanced Category Styles */
+/* Simplified Category Styles */
 .category-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   padding: 2rem 0;
-}
-
-.category-breadcrumb {
-  font-size: 1rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  display: block;
-  margin-bottom: 0.5rem;
 }
 
 .category-description {
@@ -134,217 +84,131 @@
   margin: 1rem auto 0 auto;
 }
 
-.back-navigation {
-  margin-bottom: 2rem;
+.categories-list {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  background: rgba(127, 255, 0, 0.1);
-}
-
-.back-link:hover {
-  background: rgba(127, 255, 0, 0.2);
-  transform: translateX(-4px);
-}
-
-/* Categories Grid */
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.category-card {
+.category-section {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  padding: 2rem;
-  transition: var(--transition);
-  position: relative;
+  margin-bottom: 3rem;
   overflow: hidden;
+  transition: var(--transition);
 }
 
-.category-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--primary-gradient);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-medium);
-  background: var(--card-bg-hover);
+.category-section:hover {
   border-color: var(--primary-color);
+  box-shadow: var(--shadow-light);
 }
 
-.category-card:hover::before {
-  transform: scaleX(1);
+.category-header-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(127, 255, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .category-icon {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--primary-color);
-  margin-bottom: 1.5rem;
 }
 
-.category-name a {
+.category-name {
   color: var(--text-color);
-  text-decoration: none;
   font-size: 1.5rem;
   font-weight: 600;
-  transition: var(--transition);
-}
-
-.category-name a:hover {
-  color: var(--primary-color);
+  margin-bottom: 0.3rem;
 }
 
 .category-count {
   color: var(--text-muted);
   font-size: 0.9rem;
-  margin: 0.5rem 0 1.5rem 0;
+  margin: 0;
 }
 
-.category-preview {
-  margin-bottom: 1.5rem;
+.category-posts {
+  padding: 1rem;
 }
 
-.preview-post {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.preview-post a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: var(--transition);
-  line-height: 1.4;
-}
-
-.preview-post a:hover {
-  color: var(--primary-color);
-}
-
-.more-posts {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-style: italic;
-}
-
-.explore-category {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--primary-gradient);
-  color: var(--bg-color);
-  text-decoration: none;
-  padding: 0.7rem 1.2rem;
+.category-post-item {
+  padding: 1.5rem;
   border-radius: var(--border-radius);
-  font-weight: 500;
   transition: var(--transition);
-  box-shadow: var(--shadow-light);
+  border-bottom: 1px solid rgba(127, 255, 0, 0.1);
 }
 
-.explore-category:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-  filter: brightness(1.1);
+.category-post-item:last-child {
+  border-bottom: none;
 }
 
-/* Single Category Posts */
-.category-posts-grid {
-  display: grid;
-  gap: 2rem;
-}
-
-.category-post-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  transition: var(--transition);
-}
-
-.category-post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+.category-post-item:hover {
   background: var(--card-bg-hover);
-  border-color: var(--primary-color);
+  transform: translateX(8px);
 }
 
-.category-post-card .post-meta {
+.category-post-item .post-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.category-post-card .post-date {
+.category-post-item .post-date {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
 
-.category-post-card .post-tags {
+.category-post-item .post-tags {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.3rem;
 }
 
-.category-post-card .tag {
+.category-post-item .tag {
   background: rgba(127, 255, 0, 0.1);
   color: var(--primary-color);
-  padding: 0.2rem 0.5rem;
+  padding: 0.15rem 0.4rem;
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 500;
 }
 
-.category-post-card .post-title a {
+.category-post-item .post-title {
+  margin-bottom: 0.8rem;
+}
+
+.category-post-item .post-title a {
   color: var(--text-color);
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
   transition: var(--transition);
   line-height: 1.3;
 }
 
-.category-post-card .post-title a:hover {
+.category-post-item .post-title a:hover {
   color: var(--primary-color);
 }
 
-.category-post-card .post-excerpt {
+.category-post-item .post-excerpt {
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 1rem 0;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
-.category-post-card .post-footer {
+.category-post-item .post-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.5rem;
 }
 
 .read-more-link {
@@ -355,6 +219,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  font-size: 0.9rem;
 }
 
 .read-more-link:hover {
@@ -370,29 +235,32 @@
 }
 
 @media (max-width: 768px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .category-card {
+  .category-header-info {
     padding: 1.5rem;
   }
   
-  .category-post-card {
-    padding: 1.5rem;
+  .category-posts {
+    padding: 0.5rem;
   }
   
-  .category-post-card .post-meta {
+  .category-post-item {
+    padding: 1rem;
+  }
+  
+  .category-post-item .post-meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
   
-  .category-post-card .post-footer {
+  .category-post-item .post-actions {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.8rem;
+  }
+  
+  .category-post-item:hover {
+    transform: none;
   }
 }
 </style>
