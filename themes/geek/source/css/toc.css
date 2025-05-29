@@ -201,9 +201,15 @@
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
+  main {
+    padding: 0 0;
+  }
   .page-container {
-    flex-direction: column;
-    padding: 0 1rem;
+    /* flex-direction: column; */
+    /* padding: 0 1rem; */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0;
   }
   
   .toc-card {
@@ -232,7 +238,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 1rem 0;
+    padding: 1rem 0 !important;
   }
 }
 
