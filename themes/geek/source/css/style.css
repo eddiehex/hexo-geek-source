@@ -1692,6 +1692,11 @@ mjx-mtd {
   box-shadow: var(--shadow-medium);
 }
 
+.category-accordion-item.expanded .category-accordion-content {
+  max-height: 2000px !important; /* Higher value to ensure content fits */
+  overflow: visible;
+}
+
 .category-accordion-header {
   display: flex;
   justify-content: space-between;
