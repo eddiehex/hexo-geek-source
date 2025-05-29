@@ -205,18 +205,21 @@ nav {
   padding: 0.5rem 0;
 }
 
-.search-result-item {
+.search-result-item,
+.search-result-item a {
   padding: 0.8rem 1rem;
   border-bottom: 1px solid rgba(127, 255, 0, 0.1);
   cursor: pointer;
   transition: var(--transition);
   display: block;
-  text-decoration: none;
-  color: var(--text-color);
+  text-decoration: none !important;
+  color: var(--text-color) !important;
 }
 
-.search-result-item:visited {
-  color: var(--text-color);
+.search-result-item:visited,
+.search-result-item a:visited {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
 }
 
 .search-result-item:last-child {
@@ -229,8 +232,9 @@ nav {
   color: var(--primary-color);
 }
 
-.search-result-title {
-  color: var(--text-color);
+.search-result-title,
+.search-result-title a {
+  color: var(--text-color) !important;
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -239,6 +243,7 @@ nav {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-decoration: none !important;
 }
 
 .search-result-excerpt {
@@ -1408,6 +1413,9 @@ mjx-mtd {
 
 .archive-header {
   margin-bottom: 2rem;
+  text-align: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .archive-title {
@@ -1418,13 +1426,15 @@ mjx-mtd {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  display: inline-block;
 }
 
 .archive-description {
   color: var(--text-secondary);
   font-size: 1.1rem;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin: 0 auto 1.5rem auto;
+  max-width: 80%;
 }
 
 .archive-years-tabs {
