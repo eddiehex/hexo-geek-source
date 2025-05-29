@@ -2194,16 +2194,17 @@ footer a:hover {
   font-weight: 600;
 }
 
-/* 数学公式全局修复 */
+/* 数学公式统一样式 - 重构版 */
+/* 全局数学公式基础样式 */
 mjx-container {
   color: var(--text-color) !important;
-  overflow-x: auto;
-  overflow-y: hidden;
   line-height: 1.6;
   font-family: "Times New Roman", "STIX Two Math", serif !important;
+  transition: all 0.2s ease;
+  max-width: 100%;
 }
 
-/* 确保数学公式不被其他样式覆盖 */
+/* 数学公式容器优化 */
 .page-body mjx-container,
 .post-content mjx-container,
 .page-content mjx-container {
@@ -2211,25 +2212,65 @@ mjx-container {
   font-size: inherit !important;
 }
 
-/* 修复数学公式的行内显示 */
-mjx-container:not([display="true"]) {
-  line-height: inherit !important;
-  vertical-align: -0.2em !important;
-}
-
-/* 修复块级数学公式的居中显示 */
+/* 块级数学公式 - 重构版 */
 mjx-container[display="true"] {
+  margin: 2rem 0 !important;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
   text-align: center !important;
   width: 100% !important;
+  display: block !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* 增强移动端滚动体验 */
+  scroll-behavior: smooth;
+  transform: translateZ(0); /* 启用硬件加速 */
+  will-change: transform; /* 优化渲染性能 */
 }
 
-/* 数学公式内的元素间距优化 */
+/* 块级公式悬停效果 */
+mjx-container[display="true"]:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+}
+
+/* 块级公式内部数学元素 */
+mjx-container[display="true"] mjx-math {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  display: inline-block;
+  min-width: fit-content;
+}
+
+/* 内联数学公式 - 重构版 */
+mjx-container:not([display="true"]) {
+  color: var(--text-color) !important;
+  background: rgba(127, 255, 0, 0.05);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  margin: 0 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: -0.2em !important;
+  line-height: inherit !important;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* 数学公式内部元素样式优化 */
 mjx-math {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  display: inline-block;
   letter-spacing: normal !important;
   word-spacing: normal !important;
 }
 
-/* 修复数学公式中的特殊符号 */
+/* 特殊数学符号优化 */
 mjx-mo {
   font-family: "STIX Two Math", "Times New Roman", serif !important;
 }
@@ -2244,7 +2285,7 @@ mjx-mn {
   color: var(--primary-color) !important;
 }
 
-/* 修复分数线和根号的显示 */
+/* 分数线和根号显示优化 */
 mjx-mfrac > mjx-frac-line {
   border-color: var(--text-color) !important;
 }
@@ -2253,13 +2294,13 @@ mjx-msqrt > mjx-sqrt-line {
   border-color: var(--text-color) !important;
 }
 
-/* 修复矩阵和括号 */
+/* 矩阵和括号优化 */
 mjx-mo[data-semantic-type="fence"] {
   color: var(--text-color) !important;
   font-size: 1.2em !important;
 }
 
-/* 防止数学公式被代码样式影响 */
+/* 代码块中的公式样式保护 */
 pre mjx-container,
 code mjx-container {
   background: none !important;
@@ -2269,19 +2310,88 @@ code mjx-container {
   color: var(--text-color) !important;
 }
 
-/* 确保数学公式在暗色主题下可见 */
+/* 暗色主题下数学公式元素可见性保障 */
 mjx-container * {
   color: inherit !important;
 }
 
-/* 修复公式前后的空白处理 */
+/* 上下文特定公式样式优化 */
 .page-body p mjx-container[display="true"] {
   margin: 1.5rem 0 !important;
   display: block !important;
 }
 
-/* 修复列表项中的数学公式 */
 .page-body li > mjx-container[display="true"] {
   margin: 1rem 0 !important;
   display: block !important;
+}
+
+/* 长公式换行处理优化 */
+mjx-container[display="true"] mjx-mrow {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 防止长公式溢出容器 */
+mjx-container mjx-mtext {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 移动端数学公式响应式优化 */
+@media (max-width: 768px) {
+  /* 移动端块级公式优化 */
+  mjx-container[display="true"] {
+    padding: 1rem;
+    margin: 1.5rem 0 !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    /* 移动端缩放系数调整 */
+    font-size: 0.9rem;
+    transform: scale(0.95);
+    transform-origin: left center;
+  }
+  
+  /* 移动端公式内容大小调整 */
+  mjx-container[display="true"] mjx-math {
+    font-size: 0.95rem !important;
+    min-width: max-content;
+  }
+  
+  /* 移动端内联公式调整 */
+  mjx-container:not([display="true"]) {
+    padding: 0.05rem 0.2rem;
+    margin: 0 0.05rem;
+    font-size: 0.9em;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* 优化移动端表格公式显示 */
+  mjx-container[display="true"] mjx-mtable {
+    overflow-x: auto;
+    max-width: 100%;
+    display: block;
+    padding-bottom: 5px; /* 增加滚动空间 */
+  }
+  
+  /* 特殊情况下的兼容性处理 */
+  mjx-container[display="true"] mjx-mrow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: thin;
+  }
+  
+  /* 防止iOS滚动横滑反弹 */
+  mjx-container {
+    -webkit-overflow-scrolling: touch;
+  }
 }
