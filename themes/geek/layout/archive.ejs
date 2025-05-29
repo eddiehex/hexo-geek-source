@@ -1,4 +1,10 @@
 <div class="archive-container">
+  <div class="archive-header">
+    <h1 class="archive-title">Archive</h1>
+    <p class="archive-description">
+      Browse all articles organized by date
+    </p>
+  </div>
   <% let years = {}; %>
   <% page.posts.each(function(post){ %>
     <% const year = date(post.date, 'YYYY'); %>

@@ -212,11 +212,11 @@ nav {
   transition: var(--transition);
   display: block;
   text-decoration: none;
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 .search-result-item:visited {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 .search-result-item:last-child {
@@ -226,11 +226,11 @@ nav {
 .search-result-item:hover {
   background: rgba(127, 255, 0, 0.1);
   transform: translateX(4px);
-  color: var(--text-color) !important;
+  color: var(--primary-color);
 }
 
 .search-result-title {
-  color: var(--text-color) !important;
+  color: var(--text-color);
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -1404,6 +1404,27 @@ mjx-mtd {
   max-width: 1000px;
   margin: 3rem auto;
   padding: 0 1rem;
+}
+
+.archive-header {
+  margin-bottom: 2rem;
+}
+
+.archive-title {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.archive-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
 }
 
 .archive-years-tabs {
