@@ -21,7 +21,7 @@
 - name: Monitor
   description: Service Monitor Panel
   icon: fas fa-desktop
-  url: https://cloud.kygoho.win/
+  url: https://cloud.kygoho.win/server/
 
 
 - name: Image Hosting
@@ -29,7 +29,7 @@
   icon: fas fa-cloud-upload-alt
   url: https://up.423327.xyz
 
-- name: Collection
-  description: Collection of some sites
-  icon: fas fa-folder
-  url: https://charons.news
+- name: Pod's Garden
+  description: Blog of my friend Pod
+  icon: fas fa-seedling
+  url: https://cloud.kygoho.win
